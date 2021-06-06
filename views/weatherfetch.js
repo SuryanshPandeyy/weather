@@ -10,7 +10,7 @@ const getInfo = async() => {
     var long = y.innerText;
     console.log(lat, long);
 
-    let url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long + '&units=metric&&appid=158e0d750780363dae6d4e77050a308b';
+    let url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long + '&units=metric&&appid=158e0d750780363dae6d4e77050a308b';
 
         const response = await fetch(url);
         console.log(response);
