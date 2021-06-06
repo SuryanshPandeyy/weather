@@ -1,0 +1,26 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "weather web app",
+  "main": "weather.js",
+  "dependencies": {
+    "alert": "^5.0.10",
+    "cheerio": "^1.0.0-rc.9",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "hbs": "^4.1.2",
+    "node-navigator": "^1.0.1",
+    "nodemon": "^2.0.7",
+    "prompt": "^1.1.0",
+    "requests": "^0.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "weather"
+  ],
+  "author": "suryanshpallavi",
+  "license": "ISC"
+}

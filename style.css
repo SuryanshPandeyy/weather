@@ -1,0 +1,57 @@
+*{
+    padding: 0;
+    margin: 0rem;
+    box-sizing: border-box;
+    font-size:2.5rem;
+}
+html,
+body{
+    font-size: 62.5%;
+}
+.container{
+    width: 100%;
+    margin: 1rem 0 ;
+    padding: 1rem;
+}
+.weather_box{
+    background: rgba(0, 51, 253, 0.862);
+    height: 20rem;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+.weather_icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.weather_icon i{
+    font-size: 10rem;
+}
+.weather_details{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.temp{
+    margin-bottom: 2rem;
+    font-size: 6rem; 
+}
+.temp span{
+    position: relative;
+    top: -1rem;
+    font-size: 2.5rem;
+}
+.location{
+    display: flex;
+    justify-content: space-around;
+    align-items: space-around;
+}
+.location i{
+    margin: 0 1rem;
+    font-size: 3rem;
+}
+.date{
+    font-size: 1.7rem;
+}

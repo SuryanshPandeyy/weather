@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0rem;
+            box-sizing: border-box;
+            font-size: 2.5rem;
+        }
+
+        html,
+        body {
+            font-size: 62.5%;
+        }
+
+        .container {
+            width: 100%;
+            margin: 1rem 0;
+            padding: 1rem;
+        }
+
+        .weather_box {
+            background: rgba(0, 51, 253, 0.862);
+            height: 20rem;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .weather_icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .weather_icon i {
+            font-size: 10rem;
+        }
+
+        .weather_details {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media screen and (min-width: 992px) {
+            .weather_details {
+                display: flex;
+                flex-direction: row;
+                justify content: space-around;
+                align-items: center;
+            }
+            .temp_extra{
+                position: relative;
+                left: 10rem; 
+            }
+        }
+
+        .temp {
+            font-size: 3rem;
+        }
+
+        .temp_degree {
+            position: relative;
+            top: -3.4rem;
+            font-size: 2.5rem;
+            left: 7rem;
+        }
+        .temp_extra{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .temp_info {}
+
+        .location {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: space-around;
+        }
+
+        .location i {
+            margin: 0 1rem;
+            font-size: 2rem;
+        }
+
+        .date {
+            font-size: 1.7rem;
+        }
+
+        #lat,
+        #long {
+            display: none;
+        }
+
+        .temp_infos {
+            font-size: 1.5rem;
+            margin: 0rem 0 1rem 0;
+        }
+
+        .temp_infos div {
+            display: inline-block;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="weather_box">
+            <div class="weather_icon" id="weather_icon">
+            </div>
+            <div class="weather_details">
+                <div>
+                    <div class="temp" id="temp">{{tempVal}}</div><span class="temp_degree">&deg;C</span>
+                </div>
+                <div class="temp_extra">
+                    <div class="temp_infos">
+                        Min Temp:<div class="temp_info temp_max" id="temp_min">{{tempMax}}</div>
+                        Max Temp:<div class="temp_info temp_min" id="temp_max">{{tempMax}}</div>
+                    </div>
+                    <div class="location">
+                        <div class="location_icon">
+                            <i class="fas fa-street-view"></i>
+                        </div>
+                        <div class="real_location" id="real_location">
+                            {{location}}
+                        </div>
+                    </div>
+                    <div class="date" id="date"></div>
+                    <div class="date" id="time"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="lat"></div>
+    <div id="long"></div>
+
+    <script>
+
+        var x = document.getElementById("lat");
+        var y = document.getElementById("long");
+        navigator.geolocation.getCurrentPosition((position) => {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+            x.innerHTML = lat;
+            y.innerHTML = long;
+        });
+
+        console.log(x.innerHTML,y.innerHTML);
+
+
+
+    </script>
+
+    <script type="text/javascript">
+        const status = "{%tempstatus%}";
+        weather_icon = document.getElementById("weather_icon");
+        if (status === "Sunny") {
+            weather_icon.innerHTML = "<i class='fas fa-sun'></i>";
+        }
+        else if (status === "Clouds") {
+            weather_icon.innerHTML = "<i class='fas fa-cloud'></i>";
+        }
+        else if (status === "Rainy") {
+            weather_icon.innerHTML = "<i class='fas fa-cloud-rain'></i>"
+        } else {
+            weather_icon.innerHTML = "<i class='fas fa-cloud'></i>";
+        }
+
+        let dateID = document.getElementById("date");
+        var timeID = document.getElementById("time");
+
+        const getCurrentDay = () => {
+            let currentDate = new Date();
+            var weekends = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ];
+            return weekends[currentDate.getDay()];
+        }
+        const getCurrentMonth = () => {
+            let currentDate = new Date();
+            var months = [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
+            ]
+            return months[currentDate.getMonth()];
+        }
+
+        const getCurrentTime = () => {
+            var currentDate = new Date();
+            var time = currentDate.toLocaleTimeString();
+            timeID.innerHTML = `${time}`;
+        }
+        var currTime = setInterval(getCurrentTime, 1000);
+
+        // var myVar = setInterval(myTimer, 1000);
+
+        // function myTimer() {
+        //     var d = new Date();
+        //     var t = d.toLocaleTimeString();
+        //     document.getElementById("demo").innerHTML = t;
+        // }
+
+        dateID.innerHTML = `${getCurrentDay()} | ${getCurrentMonth()}`;
+
+    </script>
+    <script async src="weatherfetch.js"></script>
+</body>
+
+</html>
