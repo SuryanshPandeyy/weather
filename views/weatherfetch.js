@@ -4,7 +4,7 @@ const temp_min = document.getElementById("temp_min");
 const temp_max = document.getElementById("temp_max");
 
 
-const getInfo = async() => { 
+const getInfo = async() => {
 
     var lat = x.innerText;
     var long = y.innerText;
